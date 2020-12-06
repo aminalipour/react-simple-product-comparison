@@ -4,6 +4,7 @@ const initialState = {
     products: [],
     isLoading: false,
     compareData: {},
+    random: Math.random()
 }
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -20,7 +21,8 @@ export default function (state = initialState, action) {
         case SET_COMPARE_DATA:
             return  {
                 ...state,
-                compareData: action.payload
+                compareData: action.payload,
+                random: Math.random()
             }
         default:
             return state;

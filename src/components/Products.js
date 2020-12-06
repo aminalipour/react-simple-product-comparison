@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Product from "./Product";
+const images = [
+    'blackberry.png',
+    'cherry.png',
+    'kiwi.png',
+    'peach.png'
+];
 
 class Products extends Component {
     render() {
@@ -8,8 +14,9 @@ class Products extends Component {
         return (
             <React.Fragment>
                 {products.map((item, key) => {
+                    const image = images[Math.floor(Math.random() * images.length)];
                     return (
-                        <Product data={item} key={key}/>
+                        <Product image={image} data={item} key={key}/>
                     )
                 })}
             </React.Fragment>

@@ -1,25 +1,26 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {toggleToCompareTable} from "../actions/productActions";
 
-const images = [
-    'blackberry.png',
-    'cherry.png',
-    'kiwi.png',
-    'peach.png'
-];
 
 class Product extends Component {
+    toggleToCompareTable = () => {
+        this.props.toggleToCompareTable(this.props.data)
+    }
+
+
     render() {
         const data = this.props.data;
-        const image = images[Math.floor(Math.random() * images.length)];
+        const compareData = Object.keys(this.props.compareData);
         return (
             <div className="col-md-4 mt-2 mb-2">
                 <div className="card product">
                     <div className="img-container text-center">
                         <div className="layer"/>
                         <img className="card-img-top img-fluid m-auto" style={{maxWidth: "200px", height: '200px'}}
-                             src={"/images/" + image} alt="Card image cap"/>
-                        <button type="button" className="btn btn-outline-light cmp-btn">COMPARE</button>
+                             src={"/images/"+this.props.image} alt="Card image cap"/>
+                        <button onClick={this.toggleToCompareTable} type="button" className={ "btn cmp-btn "  + ( compareData.includes(data.id) ? 'btn-light' : 'btn-outline-light')}>{compareData.includes(data.id) ? 'REMOVE' : 'COMPARE'}</button>
                     </div>
 
                     <div className="card-body">
@@ -40,7 +41,14 @@ class Product extends Component {
 }
 
 Product.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    image: PropTypes.string.isRequired,
+    compareData: PropTypes.object.isRequired,
+    toggleToCompareTable: PropTypes.func.isRequired,
 };
 
-export default Product;
+const mapStateToProps = state => ({
+    compareData: state.product.compareData,
+    random: state.product.random,
+});
+export default connect(mapStateToProps,{toggleToCompareTable})(Product);
