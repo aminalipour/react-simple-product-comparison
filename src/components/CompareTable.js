@@ -11,22 +11,24 @@ class CompareTable extends Component {
                 <div className="table-responsive">
                     <table className="table table-bordered">
                         <thead>
-                        <th/>
-                        {ids.map((item, key) => {
-                            return (<th>{compareData[item].employee_name}</th>)
-                        })}
+                            <tr>
+                                <th/>
+                                {ids.map((item, key) => {
+                                    return (<th key={key}>{compareData[item].employee_name}</th>)
+                                })}
+                            </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>Price</td>
                             {ids.map((item, key) => {
-                                return (<td className="text-success">${compareData[item].employee_salary}</td>)
+                                return (<td key={key} className="text-success">${compareData[item].employee_salary}</td>)
                             })}
                         </tr>
                         <tr>
                             <td>Age</td>
                             {ids.map((item, key) => {
-                                return (<td>{compareData[item].employee_age}</td>)
+                                return (<td key={key}>{compareData[item].employee_age}</td>)
                             })}
                         </tr>
                         </tbody>
